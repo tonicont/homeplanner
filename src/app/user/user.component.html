@@ -1,0 +1,66 @@
+<div>
+    <table style="border: 1px solid">
+      <tr>
+        <th></th>
+        <th>Lunes</th>
+        <th>Martes</th>
+        <th>Miercoles</th>
+        <th>Jueves</th>
+        <th>Viernes</th>
+        <th>Sabado</th>
+        <th>domingo</th>
+      </tr>
+      <tr *ngFor="let user of users ">
+        <td> {{user.name}} </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'lunes')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'martes')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'miercoles')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'jueves')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'viernes')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'sabado')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let task of getAssigmentsByDay(user.name, 'domingo')">
+              <span> {{task.task.desc}} </span>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+</div>
