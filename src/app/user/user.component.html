@@ -64,3 +64,16 @@
       </tr>
     </table>
 </div>
+
+<div>
+  <h3>Lista de Usuarios</h3>
+  <ul>
+    <li *ngFor="let user of users ">
+      {{ user.name }}
+    </li>
+  </ul>
+  <label>name:
+    <input [(ngModel)]="newUserName" placeholder="Nombre" required="">
+  </label>
+  <button (click)="addUser()">Añadir nuevo usuario</button>
+</div>

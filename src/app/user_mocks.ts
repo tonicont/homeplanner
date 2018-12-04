@@ -9,7 +9,7 @@ export const USERS: User[] = [
         {'task': {'desc': 'pasar aspiradora'},
           'days': ['martes', 'viernes']},
         {'task': {'desc': 'planchar'},
-          'days': ['domingo']}
+          'days': ['martes', 'domingo']}
       ]},
     {'name': 'jessy',
       'tasks': [
