@@ -23,14 +23,28 @@ export class UserService {
 
   getUsersfromDatabase(): any {
     const database = firebase.database();
-    return database.ref('users').on('value', function() {});
+    return database.ref('users').once('value');
   }
 
   addUser(user: User): void {
     const database = firebase.database();
-    database.ref('users/3').set({
+    const userListRef = database.ref('users');
+    const newUserRef = userListRef.push();
+    newUserRef.set({
       name: user.name,
       tasks: user.tasks
     });
+  }
+
+  deleteUser(userId: string): void {
+    const database = firebase.database();
+    const userRef = database.ref('users/' + userId);
+    userRef.remove()
+      .then(function() {
+        console.log('Remove succeeded.');
+      })
+      .catch(function(error) {
+        console.log('Remove failed: ' + error.message);
+      });
   }
 }

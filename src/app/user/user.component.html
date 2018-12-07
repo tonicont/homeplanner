@@ -69,7 +69,10 @@
   <h3>Lista de Usuarios</h3>
   <ul>
     <li *ngFor="let user of users ">
-      {{ user.name }}
+      <span>{{ user.id }}</span>
+      <span> => </span>
+      <span>{{ user.name }}</span>
+      <button (click)="deleteUser(user.id)">Eliminar</button>
     </li>
   </ul>
   <label>name:

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
-import { TASKS } from '../tasks_mock';
+import { TasksService } from '../tasks.service';
+import {User} from '../user';
 
 
 @Component({
@@ -10,10 +11,34 @@ import { TASKS } from '../tasks_mock';
 })
 export class TasksComponent implements OnInit {
   tasks: Task[];
-  constructor() { }
+  newTaskDesc: string;
+
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.tasks = TASKS;
+    this.getUsersFromDatabase();
+  }
+
+  getUsersFromDatabase(): void {
+    const tasks = [];
+    this.tasksService.getTasksfromDatabase().then(function (tasksList) {
+      tasksList.forEach(function(tasksListItem) {
+        const task = new Task(tasksListItem.key, tasksListItem.val().desc);
+        tasks.push(task);
+      });
+    });
+    this.tasks = tasks;
+  }
+
+  createTask(): void {
+    const newTas = new Task('', this.newTaskDesc);
+    if (newTas.desc) {
+      this.tasksService.addTask(newTas);
+      console.log('Tarea añadida => ' + newTas.desc);
+    } else {
+      alert('La tarea debe contener una descripción');
+      console.log('Error add task input ');
+    }
   }
 
 }

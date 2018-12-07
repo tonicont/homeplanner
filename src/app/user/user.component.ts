@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
-import { USERS } from '../user_mocks';
 import {Assigment} from '../assigment';
 import { UserService } from '../user.service';
 
@@ -20,7 +19,7 @@ export class UserComponent implements OnInit {
   }
 
   addUser(): void {
-    const user = new User(this.newUserName, this.assigments);
+    const user = new User('', this.newUserName, this.assigments);
     if (user.name !== 'undefined') {
       this.userService.addUser(user);
       console.log('Usuario creado => ' + user.name);
@@ -37,7 +36,7 @@ export class UserComponent implements OnInit {
 
   getUserAssigments(userName: string): Assigment[] {
     const assigments = this.getUserByName(userName).tasks;
-    if (assigments !== 'undefined') {
+    if (assigments) {
       return assigments;
     } else {
       return [];
@@ -51,16 +50,20 @@ export class UserComponent implements OnInit {
     return tasks;
   }
 
+  deleteUser(userId: string): void {
+    this.userService.deleteUser(userId);
+  }
+
 
   /**
    * MOVE TO SERVICE
    */
   getUsersFromDatabase(): void {
     const users = [];
-    this.userService.getUsersfromDatabase().then(function (data) {
-      data.forEach(function(childSnapshot) {
-        const tasks = childSnapshot.val().tasks ? childSnapshot.val().tasks : [];
-        const user = new User(childSnapshot.val().name, tasks);
+    this.userService.getUsersfromDatabase().then(function (userList) {
+      userList.forEach(function(userListItem) {
+        const tasks = userListItem.val().tasks ? userListItem.val().tasks : [];
+        const user = new User(userListItem.key, userListItem.val().name, tasks);
         users.push(user);
       });
     });

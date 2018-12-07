@@ -1,7 +1,13 @@
 <div>
   <ul>
     <li *ngFor="let task of tasks">
+      <span>{{ task.id }}</span>
+      <span> = > </span>
       <span>{{ task.desc }}</span>
     </li>
   </ul>
 </div>
+<label>Nueva Tarea:
+  <input placeholder="desc" [(ngModel)]="newTaskDesc" >
+</label>
+<button (click)="createTask()">Crear</button>
