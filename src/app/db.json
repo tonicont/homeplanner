@@ -1,36 +1,68 @@
 {
-  "users":[
-    {"name": "toni",
-      "tasks": [
-        {"task": {"desc": "limpiar cocina"},
-          "days": ["lunes", "jueves"]
-        },
-        {"task": {"desc": "pasar aspiradora"},
-          "days": ["martes", "viernes"]},
-        {"task": {"desc": "planchar"},
-          "days": ["domingo"]}
-      ]},
-    {"name": "jessy",
-      "tasks": [
-        {"task": {"desc": "hacer baños"},
-          "days": ["lunes", "jueves"]},
-        {"task": {"desc": "poner lavadora"},
-          "days": ["martes", "viernes"]}
-      ]
+  "users": {
+    "toni": {
+      "groups": {
+        "id1": true,
+        "id2": true
+      }
     },
-    {"name": "mari",
-      "tasks": [
-        {"task": {"desc": "hacer la cama"},
-          "days": ["domingo"]}
-      ]
+    "jessy": {
+      "groups": {
+        "id1": true
+      }
+    },
+    "pepito": {
+      "groups": {
+        "id2": true
+      }
+    },
+    "manolito": {
+      "groups": {
+        "id2": true
+      }
     }
-  ],
-  "tasks": [
-    {"desc": "limpiar cocina"},
-    {"desc": "hacer la cama"},
-    {"desc": "hacer baños"},
-    {"desc": "pasar aspiradora"},
-    {"desc": "poner lavadora"},
-    {"desc": "planchar"}
-  ]
+  },
+  "groups": {
+    "id1": {
+      "name": "casa toni",
+      "admins": {
+        "toni": true,
+        "jessy": true
+      },
+      "tasks": {},
+      "users": {
+        "toni": {
+          "belong": true,
+          "assignedTasks": {}
+        },
+        "jessy": {
+          "belong": true,
+          "assignedTasks": {}
+        }
+      }
+    },
+    "id2": {
+      "name": "casa pepito",
+      "admins": {
+        "pepito": true
+      },
+      "tasks": {},
+      "users": {
+        "pepito": {
+          "belong": true,
+          "assignedTasks": {}
+        },
+        "manolito": {
+          "belong": true,
+          "assignedTasks": {}
+        },
+        "toni": {
+          "belong": true,
+          "assignedTasks": {}
+        }
+      }
+
+    }
+  }
+
 }
