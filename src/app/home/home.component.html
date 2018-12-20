@@ -1,5 +1,14 @@
 
-<h3>Bienvenido {{username}}!!</h3>
-<p>
-  home works!
-</p>
+
+<div *ngIf="!logged">
+  <span>No estás conectado</span>
+  <a routerLink="/login">Conectate</a>
+</div>
+
+<div *ngIf="logged">
+  <h1>Bienvenido {{username}}!!</h1>
+  <div>
+    <h3>Lista de Grupos</h3>
+  </div>
+</div>
+

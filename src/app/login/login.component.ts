@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import * as firebase from 'firebase';
 
 @Component({
@@ -10,7 +12,7 @@ export class LoginComponent implements OnInit {
   email;
   password;
 
-  constructor() {  }
+  constructor(private router: Router) {  }
 
   ngOnInit() {
   }
@@ -33,12 +35,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+    const router = this.router;
+    firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then(function() {
+        router.navigate(['/home']);
+      })
+      .catch(function(error) {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
       // ...
       console.log('ERROR: ' + errorMessage );
     });
+
   }
 }

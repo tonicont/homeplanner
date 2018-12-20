@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 import * as firebase from 'firebase';
 
 @Component({
@@ -8,13 +9,18 @@ import * as firebase from 'firebase';
 })
 export class HomeComponent implements OnInit {
   username;
+  logged;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     const user = firebase.auth().currentUser;
-    if (user) {
-      this.username = user.displayName;
+    if(user) {
+      this.logged = true;
+      this.username = user.email;
+    } else {
+      this.logged = false;
+      this.router.navigate(['/login']);
     }
   }
 

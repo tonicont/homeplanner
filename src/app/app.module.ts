@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import * as firebase from 'firebase';
@@ -15,7 +14,6 @@ import * as firebase from 'firebase';
     AppComponent,
     GroupsComponent,
     LoginComponent,
-    UserComponent,
     HomeComponent
   ],
   imports: [
