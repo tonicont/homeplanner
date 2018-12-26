@@ -1,7 +1,9 @@
 <h2>Grupos a los que perteneces</h2>
 <ul>
   <li *ngFor="let group of groups">
-    <span>{{group}}</span>
+    <a routerLink="/group/{{group.key}}">{{group.val().groupName}}</a>
   </li>
 </ul>
-<button (click)="createNewGroup()">Crear Grupo</button>
+
+<input placeholder="Nombre nuevo grupo" [(ngModel)]="newGroupName" />
+<button (click)="createNewGroup(newGroupName)">Crear Grupo</button>

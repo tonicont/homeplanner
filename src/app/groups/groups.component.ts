@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 })
 export class GroupsComponent implements OnInit {
   groups = [];
+  newGroupName: string;
 
   constructor(private groupsService: GroupsService) { }
 
@@ -20,14 +21,20 @@ export class GroupsComponent implements OnInit {
     const groups = [];
     this.groupsService.getGroupsByUser(userId).then(function (data) {
       data.forEach(function(childSnapshot) {
-        groups.push(childSnapshot.key);
+        groups.push(childSnapshot);
       });
     });
     this.groups = groups;
   }
 
-  createNewGroup(): void {
-    this.groupsService.createGroup('Grupo de testing');
+  createNewGroup(newGroupName: string): void {
+    if (newGroupName) {
+      console.log(newGroupName);
+      this.groupsService.createGroup(newGroupName);
+    } else {
+      console.log('El nombre del grupo no puede estar vacío');
+    }
+
   }
 
 }

@@ -8,13 +8,15 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import * as firebase from 'firebase';
+import { GroupDetailsComponent } from './group-details/group-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GroupsComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    GroupDetailsComponent
   ],
   imports: [
     BrowserModule,
