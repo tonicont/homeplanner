@@ -5,11 +5,6 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class GroupsService {
-  user: {
-    id,
-    value
-  };
-
   constructor() { }
 
   getGroupsByUser(userId: string): any {
@@ -30,25 +25,11 @@ export class GroupsService {
     users[userId] = true;
     const newGroup = {
       groupName: groupName,
-      users: users
+      members: users
     };
     const updates = {};
     updates['/groups/' + newGroupKey] = newGroup;
-    updates['/users/' + userId + /groups/ + newGroupKey] = newGroup;
+    updates['/users/' + userId + /groups/ + newGroupKey] = true;
     database.ref().update(updates);
-  }
-
-  /**
-   *
-   * @param userId
-   */
-  getUserById(userId: string): any {
-    const database = firebase.database();
-    return database.ref('users/' + userId).once('value');
-  }
-
-  getUsersByGroup(groupId: string): any {
-    const database = firebase.database();
-    return database.ref('groups/' + groupId + '/users').once('value');
   }
 }

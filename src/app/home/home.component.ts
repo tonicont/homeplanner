@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const user = firebase.auth().currentUser;
-    if(user) {
+    if (user) {
       this.logged = true;
       this.username = user.email;
     } else {

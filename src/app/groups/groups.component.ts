@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupsService } from '../groups.service';
 import * as firebase from 'firebase';
+import {Group} from '../model/Group';
 
 @Component({
   selector: 'app-groups',
@@ -8,7 +9,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit {
-  groups = [];
+  groups: Group[];
   newGroupName: string;
 
   constructor(private groupsService: GroupsService) { }
@@ -18,10 +19,13 @@ export class GroupsComponent implements OnInit {
   }
 
   getGroupsFromDatabase(userId: string): void {
+    const groupsService = new GroupsService();
     const groups = [];
-    this.groupsService.getGroupsByUser(userId).then(function (data) {
+    groupsService.getGroupsByUser(userId).then(function (data) {
       data.forEach(function(childSnapshot) {
-        groups.push(childSnapshot);
+        groupsService.getGroupById(childSnapshot.key).then(function(group) {
+          groups.push(new Group(group.key, group.val().groupName));
+        });
       });
     });
     this.groups = groups;
@@ -29,12 +33,10 @@ export class GroupsComponent implements OnInit {
 
   createNewGroup(newGroupName: string): void {
     if (newGroupName) {
-      console.log(newGroupName);
       this.groupsService.createGroup(newGroupName);
+      this.getGroupsFromDatabase(firebase.auth().currentUser.uid);
     } else {
       console.log('El nombre del grupo no puede estar vacío');
     }
-
   }
-
 }
